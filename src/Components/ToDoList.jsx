@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import ToDoItem from './ToDoItem';
 
-const ToDoList = () => {
+const ToDoList = ({tasks,setTasks}) => {
 
     //useState to handle input values
-    const [tasks, setTasks] = useState([]);
     const [inputValue, setInputValue] = useState("");
-    const [keys,setKeys] = useState(0);
 
     function handleInputValue(e) {
         setInputValue(e.target.value);

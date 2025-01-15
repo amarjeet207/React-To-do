@@ -4,11 +4,12 @@ import Header from './Components/Header'
 import ToDoList from './Components/ToDoList'
 
 function App() {
+   const [tasks, setTasks] = useState([]);
 
   return (
     <div className="bg-fuchsia-50 m-0 p-0 box-border">
       <Header/>
-      <ToDoList/>
+      <ToDoList tasks={tasks} setTasks={setTasks}/>
     </div>
   )
 }
