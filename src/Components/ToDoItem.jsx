@@ -4,43 +4,36 @@ import Completed from '../assets/circle-check-solid.svg';
 import deleted from '../assets/circle-xmark-solid.svg';
 import Edit from '../assets/pen-to-square-solid.svg';
 
-const ToDoItem = ({task}) => {
+const ToDoItem = ({todo,deleteTodo,editTodo}) => {
 
     const [isCompleted, setIsCompleted] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [editedValue,setEditedValue] = useState('');
-    const [text,setText] = useState(task);
+    const [text,setText] = useState(todo.text);
+    
 
-    function handleCompletedStatus(e) {
+    function handleCompletedStatus() {
         setIsCompleted(!isCompleted);
     }
 
-    function handleDeletion(e) {
-        e.target.parentElement.remove();
-    }
-
-    function handleEditTask() {
+    function handleEditToggle() {
         setIsEditing(!isEditing);
     }
-
     function handleEditValue(e){
         setEditedValue(e.target.value);
     }
 
     function handleSaveEditText(){
-        if(editedValue.trim()){
-        setText(editedValue);
-        setIsEditing(!isEditing)
-        }
+        if (isEditing) {
+            editTodo(todo.id, editedValue);
+            if(editedValue.trim()){
+                setText(editedValue)
+            }
+            setIsEditing(false);
+            setEditedValue('')
+          }
     }
-
-    function handleNotEdit(e){
-        e.target.parentElement.remove();
-    }
-
-    if (!task) { // Do not render the component if task has no value or is deleted }
-        return null;
-    }
+   
 
     return (
 
@@ -48,17 +41,15 @@ const ToDoItem = ({task}) => {
             <li className=" flex w-fit gap-4 ">
                 <span className={isCompleted ? "text-xl text-slate-600 line-through" : "text-xl"} >{text}</span>
                 <img src={isCompleted ? Completed : notCompleted} className="w-5" onClick={handleCompletedStatus} />
-                <img src={Edit} className="w-5" onClick={handleEditTask} />
-                <img src={deleted} className="w-5" onClick={handleDeletion} />
+                <img src={Edit} className="w-5" onClick={handleEditToggle} />
+                <img src={deleted} className="w-5" onClick={()=>deleteTodo(todo.id)} />
             </li>
-            
-            {isEditing ? ( <div className="flex gap-4"> 
-             <input type="text" className="w-48 border-2 outline-none p-1" placeholder='Edit' 
-             onChange={handleEditValue}/> 
-             <img src={Completed} className="w-4"onClick={handleSaveEditText}/> 
-             <img src={deleted} className="w-5" onClick={handleNotEdit} />
-             </div> ) 
-             : ""}
+
+            {isEditing && ( <div className="flex gap-4"> 
+                    <input type="text" className="w-48 border-2 outline-none p-1" placeholder='Edit' 
+                    onChange={handleEditValue} value={editedValue}/> 
+                <img src={Completed} className="w-4"onClick={handleSaveEditText}/> 
+               </div> )}
         </div>
 
     )

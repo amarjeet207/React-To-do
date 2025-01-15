@@ -4,12 +4,27 @@ import Header from './Components/Header'
 import ToDoList from './Components/ToDoList'
 
 function App() {
-   const [tasks, setTasks] = useState([]);
+   const [todos, setTodos] = useState([]);
+
+   function addTodo(todo){
+    setTodos([...todos,{id: todos.length + 1, text: todo}]);
+   }
+
+   function deleteTodo(id) {
+    setTodos(todos.filter((todo) => todo.id !== id))
+  }
+
+  function editTodo(id,newTodo){
+    if(newTodo.trim()){
+      setTodos(todos.map((todo) => (todo.id === id ? { ...todo, text: newTodo } : todo))); 
+      }
+  }
+
 
   return (
     <div className="bg-fuchsia-50 m-0 p-0 box-border">
       <Header/>
-      <ToDoList tasks={tasks} setTasks={setTasks}/>
+      <ToDoList todos={todos} addTodo={addTodo} deleteTodo={deleteTodo} editTodo={editTodo}/>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ToDoItem from './ToDoItem';
 
-const ToDoList = ({tasks,setTasks}) => {
+const ToDoList = ({todos,addTodo,deleteTodo,editTodo}) => {
 
     //useState to handle input values
     const [inputValue, setInputValue] = useState("");
@@ -11,9 +11,9 @@ const ToDoList = ({tasks,setTasks}) => {
     }
 
 
-    function handleAddTasks() {
+    function handleAddTodos() {
         if (inputValue.trim() !== '') {
-            setTasks([...tasks, inputValue]);
+            addTodo(inputValue);
             setInputValue('');
         }
     }
@@ -34,14 +34,17 @@ const ToDoList = ({tasks,setTasks}) => {
 
                     <button type="submit"
                         className="bg-red-600 text-slate-50 text-lg p-2 w-20 h-12 rounded-tr-lg rounded-br-lg hover:bg-red-500 "
-                        onClick={handleAddTasks}>Add
+                        onClick={handleAddTodos}>Add
                     </button>
 
                 </div>
 
-                {tasks.map((task,index) => {
-                    return <ToDoItem  key={index} task={task} />
+                <ul>
+                {todos.map((todo) => {
+                    return <ToDoItem  key={todo.id} todo={todo}  deleteTodo={deleteTodo} editTodo={editTodo}/>
                 })}
+
+                </ul>
 
             </div>
 
