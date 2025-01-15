@@ -39,7 +39,7 @@ const ToDoItem = ({todo,deleteTodo,editTodo}) => {
 
         <div className="flex flex-col gap-2">
             <li className=" flex w-fit gap-4 ">
-                <span className={isCompleted ? "text-xl text-slate-600 line-through" : "text-xl"} >{text}</span>
+                <span className={isCompleted ? "text-xl text-slate-600 line-through" : "text-xl"} >{todo.id} - {text}</span>
                 <img src={isCompleted ? Completed : notCompleted} className="w-5" onClick={handleCompletedStatus} />
                 <img src={Edit} className="w-5" onClick={handleEditToggle} />
                 <img src={deleted} className="w-5" onClick={()=>deleteTodo(todo.id)} />
