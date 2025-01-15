@@ -17,9 +17,9 @@ A simple React application to manage your daily tasks.
 
 👉 Prerequisites Make sure you have Node.js and npm (Node Package Manager) installed on your machine. 
 
-  Step 1. **Clone the repository**: ```sh git clone https://github.com/your-username/To-do-List-Application.git
+  Step 1. **Clone the repository**:  git clone https://github.com/your-username/To-do-List-Application.git
 
-  Step 2: Navigate to the project directory: cd my-todo-list
+  Step 2: Navigate to the project directory:  cd To-do-List-Application
 
   Step 3: Install dependencies: npm install
 
